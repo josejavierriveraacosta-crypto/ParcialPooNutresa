@@ -52,7 +52,7 @@ public class Main {
         ollaTrifasico.agregarIngrediente(new Proteina("PRO-003", "Cerdo", 1000, 20000, true, "cerdo"));
         ollaTrifasico.agregarIngrediente(new Proteina("PRO-004", "Pollo", 1000, 16000, true, "pollo"));
         ollaTrifasico.agregarIngrediente(new Tuberculo("TUB-003", "Papa", 1000, 3000, true, true));
-        ollaTrifasico.agregarIngrediente(new Verdura("VER-004", "Mazorca", 500, 4000, true, false));
+        new Verdura("VER-004", "Mazorca", 500, 4000, true)
         ollaTrifasico.agregarIngrediente(new Condimento("CON-003", "Cilantro", 50, 20000, true, true));
 
         Sancocho trifasico = new Sancocho("SAN-002", "Sancocho trifásico", ollaTrifasico, 12);
