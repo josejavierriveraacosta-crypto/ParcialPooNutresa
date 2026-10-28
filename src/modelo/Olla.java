@@ -14,12 +14,10 @@ public class Olla {
     public int getCapacidadGramos() { return capacidadGramos; }
     public int getCantidadIngredientes() { return ingredientes.size(); }
 
-    /** Retorna una copia para que nadie modifique la lista interna desde afuera. */
     public ArrayList<Ingrediente> getIngredientes() {
         return new ArrayList<>(ingredientes);
     }
 
-    /** Agrega el ingrediente solo si está fresco, su código no está repetido y CABE en la olla */
     public boolean agregarIngrediente(Ingrediente nuevo) {
         if (nuevo == null) {
             return false;
@@ -29,8 +27,7 @@ public class Olla {
             return false;
         }
         if (buscarPorCodigo(nuevo.getCodigo()) != null) {
-            System.out.println("No se agregó " + nuevo.getNombre()
-                    + ": el código " + nuevo.getCodigo() + " ya está en la olla.");
+            System.out.println("No se agregó " + nuevo.getNombre() + ": el código " + nuevo.getCodigo() + " ya está en la olla.");
             return false;
         }
         if (calcularPesoTotal() + nuevo.getGramos() > capacidadGramos) {
@@ -41,10 +38,9 @@ public class Olla {
         return true;
     }
 
-    /** Retorna el ingrediente con ese código o null si no está en la olla. */
     public Ingrediente buscarPorCodigo(String codigo) {
         for (Ingrediente i : ingredientes) {
-            if (i.getCodigo().equals(codigo)) {
+            if (i.getCodigo().equalsIgnoreCase(codigo)) {
                 return i;
             }
         }
@@ -59,7 +55,6 @@ public class Olla {
         return total;
     }
 
-    /** Suma el costo de TODOS los ingredientes de la olla. */
     public double calcularCostoIngredientes() {
         double total = 0;
         for (Ingrediente i : ingredientes) {
@@ -68,7 +63,6 @@ public class Olla {
         return total;
     }
 
-    /** La olla está lista cuando termina el ingrediente MÁS demorado (el mayor tiempo). */
     public int calcularTiempoCoccion() {
         int mayor = 0;
         for (Ingrediente i : ingredientes) {
@@ -82,7 +76,7 @@ public class Olla {
     public int contarPorCategoria(String categoria) {
         int contador = 0;
         for (Ingrediente i : ingredientes) {
-            if (i.getCategoria().equals(categoria)) {
+            if (i.getCategoria().equalsIgnoreCase(categoria)) {
                 contador++;
             }
         }

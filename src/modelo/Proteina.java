@@ -21,6 +21,6 @@ public class Proteina extends Ingrediente {
 
     @Override
     public String getCategoria() {
-        return "Proteina";
+        return "Proteína";
     }
 }

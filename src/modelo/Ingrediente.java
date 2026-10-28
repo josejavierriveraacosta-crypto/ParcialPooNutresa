@@ -27,7 +27,7 @@ public abstract class Ingrediente implements Identificable, Costeable {
 
     public void setNombre(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacio");
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
         }
         this.nombre = nombre;
     }
@@ -50,21 +50,17 @@ public abstract class Ingrediente implements Identificable, Costeable {
         this.fresco = fresco;
     }
 
-    /** Costo en pesos: los gramos se pasan a kilos y se multiplican por el precio del kilo. */
     @Override
     public double calcularCosto() {
-        return gramos / 1000 * precioKilo;
+        return gramos / 1000.0 * precioKilo;
     }
 
-    /** Minutos que el ingrediente necesita dentro de la olla. */
     public abstract int minutosCoccion();
-
-    /** "Proteina", "Tubérculo", "Verdura" o "Condimento". */
     public abstract String getCategoria();
 
     @Override
     public String obtenerFicha() {
-        return getCategoria() + " [" + codigo + "] " + nombre + " - " + gramos + " g, $ "
+        return getCategoria() + " [" + codigo + "] " + nombre + " - " + gramos + " g, $"
                 + String.format("%.2f", calcularCosto()) + ", " + minutosCoccion() + " min";
     }
 }
