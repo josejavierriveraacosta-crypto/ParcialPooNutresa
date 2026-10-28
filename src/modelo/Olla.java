@@ -19,7 +19,7 @@ public class Olla {
         return new ArrayList<>(ingredientes);
     }
 
-    /** Agrega el ingrediente solo si está fresco, su código no está repetido y CABE en la olla. */
+    /** Agrega el ingrediente solo si está fresco, su código no está repetido y CABE en la olla */
     public boolean agregarIngrediente(Ingrediente nuevo) {
         if (nuevo == null) {
             return false;
@@ -33,7 +33,7 @@ public class Olla {
                     + ": el código " + nuevo.getCodigo() + " ya está en la olla.");
             return false;
         }
-        if (calcularPesoTotal() > capacidadGramos) {
+        if (calcularPesoTotal() + nuevo.getGramos() > capacidadGramos) {
             System.out.println("No se agregó " + nuevo.getNombre() + ": no cabe en la olla.");
             return false;
         }
@@ -44,10 +44,11 @@ public class Olla {
     /** Retorna el ingrediente con ese código o null si no está en la olla. */
     public Ingrediente buscarPorCodigo(String codigo) {
         for (Ingrediente i : ingredientes) {
-            if (i.getNombre().equals(codigo)) {
+            if (i.getCodigo().equals(codigo)) {
                 return i;
             }
         }
+        return null;
     }
 
     public int calcularPesoTotal() {
@@ -61,8 +62,8 @@ public class Olla {
     /** Suma el costo de TODOS los ingredientes de la olla. */
     public double calcularCostoIngredientes() {
         double total = 0;
-        for (int i = 1; i < ingredientes.length; i++) {
-            total += ingredientes.get(i).calcularCosto();
+        for (Ingrediente i : ingredientes) {
+            total += i.calcularCosto();
         }
         return total;
     }
@@ -71,7 +72,7 @@ public class Olla {
     public int calcularTiempoCoccion() {
         int mayor = 0;
         for (Ingrediente i : ingredientes) {
-            if (i.minutosCoccion() < mayor) {
+            if (i.minutosCoccion() > mayor) {
                 mayor = i.minutosCoccion();
             }
         }
@@ -91,7 +92,7 @@ public class Olla {
     public void mostrarIngredientes() {
         System.out.println("Olla (" + calcularPesoTotal() + "/" + capacidadGramos + " g):");
         for (Ingrediente i : ingredientes) {
-            System.out.println("  - " + i.obtenerFicha());
+            System.out.println(" - " + i.obtenerFicha());
         }
     }
 }

@@ -1,7 +1,7 @@
 package modelo;
 
 public abstract class Ingrediente implements Identificable, Costeable {
-    private final String codigo;
+    private String codigo;
     private String nombre;
     private int gramos;
     private double precioKilo;
@@ -22,19 +22,19 @@ public abstract class Ingrediente implements Identificable, Costeable {
     public String getCodigo() { return codigo; }
     public String getNombre() { return nombre; }
     public int getGramos() { return gramos; }
-    public int getPrecioKilo() { return precioKilo; }
+    public double getPrecioKilo() { return precioKilo; }
     public boolean isFresco() { return fresco; }
 
     public void setNombre(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío");
+            throw new IllegalArgumentException("El nombre no puede estar vacio");
         }
         this.nombre = nombre;
     }
 
     public void setGramos(int gramos) {
         if (gramos <= 0) {
-            throw IllegalArgumentException("Los gramos deben ser mayores que 0");
+            throw new IllegalArgumentException("Los gramos deben ser mayores que 0");
         }
         this.gramos = gramos;
     }
@@ -59,12 +59,12 @@ public abstract class Ingrediente implements Identificable, Costeable {
     /** Minutos que el ingrediente necesita dentro de la olla. */
     public abstract int minutosCoccion();
 
-    /** "Proteína", "Tubérculo", "Verdura" o "Condimento". */
+    /** "Proteina", "Tubérculo", "Verdura" o "Condimento". */
     public abstract String getCategoria();
 
     @Override
     public String obtenerFicha() {
-        return getCategoria() + " [" + codigo + "] " + nombre + " - " + gramos + " g, $
-                + String.format("%.0f", calcularCosto()) + ", " + minutosCoccion() + " min";
+        return getCategoria() + " [" + codigo + "] " + nombre + " - " + gramos + " g, $ "
+                + String.format("%.2f", calcularCosto()) + ", " + minutosCoccion() + " min";
     }
 }
